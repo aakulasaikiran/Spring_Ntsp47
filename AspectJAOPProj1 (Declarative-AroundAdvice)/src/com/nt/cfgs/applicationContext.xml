@@ -1,0 +1,39 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:aop="http://www.springframework.org/schema/aop"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop.xsd">
+<!--  cfg target class -->
+<bean id="iac" class="com.nt.service.IntrAmtCalculator"/>
+<!-- cfg aspect/advice class as spring bean -->
+<bean id="pmAspect"  class="com.nt.aspect.PerformanceMonitoringAspect"/>
+<bean id="cacheAspect"  class="com.nt.aspect.CacheAspect"/>
+<bean id="logAspect"  class="com.nt.aspect.LogAroundAspect"/>
+
+<aop:config>
+<!--     prepare pointcut -->
+    <aop:pointcut id="ptc1" expression="execution(* com.nt.service.IntrAmtCalculatorInterface.*(..))"/>
+    <aop:pointcut id="ptc2" expression="execution(float com.nt.service.IntrAmtCalculatorInterface.calcCompoundIntrAmt(..))"/>
+    
+    
+<!--     Cfg Advice class -->
+     <aop:aspect id="pmAdvice"  ref="pmAspect" order="2">
+        <aop:around method="monitor"  pointcut-ref="ptc1"/>
+   </aop:aspect>
+   
+   <aop:aspect id="cacheAdvice"  ref="cacheAspect" order="1">
+        <aop:around method="caching"  pointcut-ref="ptc2"/>
+   </aop:aspect>
+    <aop:aspect id="logAdvice"  ref="logAspect" order="3">
+        <aop:around method="log"  pointcut-ref="ptc1"/>
+   </aop:aspect>
+     
+   
+   
+</aop:config>
+
+
+
+</beans>

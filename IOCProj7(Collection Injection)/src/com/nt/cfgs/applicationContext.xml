@@ -1,0 +1,57 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+  <bean id="mm"  class="com.nt.beans.MultiMedia">
+   <property name="colors">
+       <list>
+          <value>red</value>
+          <value>blue</value>
+          <value>green</value>
+       </list>
+    </property>
+  </bean>
+  <bean id="clg"  class="com.nt.beans.College">
+    <property name="names">
+         <list>
+             <value>srinivas</value>
+             <value>raja</value>
+             <value>srinivas</value>
+           </list>
+     </property>
+ </bean>
+ 
+ <bean id="mnp"  class="com.nt.beans.MobileNetworkProvider">
+     <property name="phones">
+        <set>
+           <value>9999999999</value>
+            <value>9999988888</value>
+        </set>
+       </property>
+  </bean>
+  
+  <bean id="uni"  class="com.nt.beans.University">
+    <property name="facultySubjects">
+           <map>
+              <entry  key="harikrishna" value="coreJava"/> 
+              <entry key="satish Gupta">   
+                   <value>CoreJava </value>
+              </entry>
+              <entry>   
+                 <key><value>Satish B </value> </key>
+                 <value> End to End </value>
+              </entry>
+            </map>
+     </property>
+  </bean>
+   <bean id="store"  class="com.nt.beans.FruitStore">
+       <property name="fruitColors">
+            <props>
+                 <prop key="banana">yellow</prop>
+                 <prop key="apple">green</prop>
+             </props>
+        </property>
+  </bean>
+  
+ 
+ </beans>

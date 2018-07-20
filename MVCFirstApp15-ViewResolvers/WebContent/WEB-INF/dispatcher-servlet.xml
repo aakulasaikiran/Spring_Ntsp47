@@ -1,0 +1,32 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!-- Controller/handler class -->
+ <bean id="wc"  class="com.nt.controller.WelcomeController"/>
+ <!-- Handler mapping -->
+<bean id="suhm" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+    <property name="mappings">
+         <props>
+            <prop key="wel.htm">wc</prop>
+            <prop key="about.htm">pvc</prop>
+         </props>               
+     </property>
+  </bean>
+  <bean id="pvc"  class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+     <property name="viewName"  value="tell_us"/>
+  </bean>
+  <!-- view Resolver -->
+<!--  <bean id="vr"  class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+      <property name="viewClass"   value="org.springframework.web.servlet.view.JstlView"/>
+      <property  name="prefix" value="/WEB-INF/pages/"/>  
+      <property  name="suffix" value=".jsp"/>
+ </bean>              -->
+ <!-- <bean id="vr"  class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
+     <property name="basename"  value="views"/>
+ </bean>
+  -->
+ <bean id="vr"  class="org.springframework.web.servlet.view.XmlViewResolver">
+<!--      <property name="location"  value="/WEB-INF/views.xml"/> -->
+ </bean>
+</beans>

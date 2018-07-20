@@ -1,0 +1,31 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                    http://www.springframework.org/schema/security 
+                    http://www.springframework.org/schema/security/spring-security-3.0.3.xsd">
+
+    <http use-expressions="true">
+        <intercept-url pattern="/home.jsp" access="permitAll" />
+        <intercept-url pattern="/secure/Admin.jsp" access="hasRole('admin')" />
+        <intercept-url pattern="/secure/Faculty.jsp" access="hasRole('faculty')" />
+         <form-login />
+         <logout />
+        <remember-me />
+         <session-management invalid-session-url="/logout.jsp">
+	            <concurrency-control max-sessions="3" error-if-maximum-exceeded="true" />
+	        </session-management> 
+
+    </http>
+
+
+    <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="raja" password="rani" authorities="admin,faculty" />
+                <user name="ravi" password="ravi" authorities="faculty" />
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+</beans:beans>   

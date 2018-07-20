@@ -1,0 +1,25 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:aop="http://www.springframework.org/schema/aop"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- cfg target class -->
+  <bean id="math"  class="com.nt.service.Math"/>
+  
+  <!-- Cfg Advice/aspect classes-->
+  <bean id="cmLogger"  class="com.nt.aspect.CommonExceptionLogger"/>
+  
+  <aop:config>
+     <aop:pointcut id="ptc"  expression="execution(* com.nt.service.Math.*(..))"/>
+     
+     <aop:aspect  id="cmLoggerAdvice" ref="cmLogger">
+        <aop:after-throwing  method="exceptionLogger"  pointcut-ref="ptc"
+                                                  throwing="ae"/>
+     </aop:aspect>
+  </aop:config>
+  
+  
+ </beans>

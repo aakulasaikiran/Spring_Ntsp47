@@ -1,0 +1,27 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--  <bean id="st"  class="com.nt.beans.Student"> -->
+<!--      <constructor-arg value="raja" type="java.lang.String"/> -->
+<!--      <constructor-arg value="67.78"  type="float"/> -->
+<!--      <constructor-arg value="101" type="int"/> -->
+<!--  </bean> -->
+
+<!--   <bean id="st"  class="com.nt.beans.Student">  -->
+<!--       <constructor-arg value="raja" name="name" />  -->
+<!--       <constructor-arg value="67.78"  name="aggr"/>  -->
+<!--       <constructor-arg value="101"  name="no"/>  -->
+<!--   </bean>  -->
+  
+   <bean id="mk"  class="com.nt.beans.Marks"> 
+       
+      <constructor-arg value="56" index="2"/> 
+      <constructor-arg value="90" index="1"/>
+      <constructor-arg  value="30" index="0"/> 
+  </bean> 
+
+
+
+</beans>

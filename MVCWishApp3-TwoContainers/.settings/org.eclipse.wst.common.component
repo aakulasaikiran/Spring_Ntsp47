@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="MVCWishApp3-TwoContainers">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <property name="context-root" value="MVCWishApp3-TwoContainers"/>
+        <property name="java-output-path" value="/MVCWishApp3-TwoContainers/build/classes"/>
+    </wb-module>
+</project-modules>

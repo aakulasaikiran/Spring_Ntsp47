@@ -1,0 +1,22 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:p="http://www.springframework.org/schema/p"
+xmlns:c="http://www.springframework.org/schema/c"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+   <bean id="dt"  class="java.util.Date" p:year="110" p:month="10" p:date="20"/>
+   <bean id="emp"  class="com.nt.beans.Emp" 
+                                    p:eno="101"
+                                    p:ename="raja"
+                                    p:dept-ref="dept"  scope="singleton"/>
+   <bean id="dept" class="com.nt.beans.Dept"
+                                    c:deptno="1111" 
+                                    c:deptName="Accounts"
+                                    c:dop-ref="dt"  scope="prototype"/>
+   
+                                                                        
+  
+  
+
+</beans>

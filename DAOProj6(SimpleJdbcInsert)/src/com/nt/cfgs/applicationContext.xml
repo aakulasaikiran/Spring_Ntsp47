@@ -1,0 +1,32 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="c3P0ds"  class="com.mchange.v2.c3p0.ComboPooledDataSource">
+    <property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>
+    <property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+    <property name="user" value="system"/>
+    <property name="password" value="manager"/>
+    <property name="initialPoolSize" value="10"/>
+     <property name="maxPoolSize" value="20"/>
+   </bean>
+ <!--   <bean id="dbcpDs" class="org.apache.commons.dbcp.BasicDataSource">
+      <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+      <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+      <property name="username" value="system"/>
+      <property name="password" value="manager"/>
+      <property name="initialSize" value="10"/>
+      <property name="maxActive" value="20"/>
+   </bean> -->
+   <bean id="sjInsert"  class="org.springframework.jdbc.core.simple.SimpleJdbcInsert">
+       <constructor-arg ref="c3P0ds"/>
+   </bean>
+   
+   <bean id="stDao"  class="com.nt.dao.StudentDAOImpl">
+      <property name="sji" ref="sjInsert"/>
+   </bean>
+   <bean id="stService"  class="com.nt.service.StudentServiceImpl">
+      <property name="dao"  ref="stDao"/>
+   </bean>
+ </beans>

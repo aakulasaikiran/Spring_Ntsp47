@@ -1,0 +1,13 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+ <bean id="home"  class="org.springframework.web.servlet.view.JstlView">
+     <property name="url"  value="/WEB-INF/pages/mostWelcome.jsp"/>
+  </bean>
+ 
+   <bean id="tell_us"  class="org.springframework.web.servlet.view.JstlView">
+      <property name="url"  value="/WEB-INF/pages/about_us.jsp"/>
+   </bean>
+ </beans>

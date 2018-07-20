@@ -1,0 +1,16 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="sysDate"   class="java.util.Date"/>
+  <bean id="doj" class="java.util.Date">
+     <property name="year"  value="110"/>
+     <property name="month" value="10"/>
+     <property name="date" value="23"/>
+  </bean>
+  <bean id="wish"  class="com.nt.beans.WishGenerator">
+        <property name="dt1" ref="doj"/>
+  </bean>
+
+</beans>

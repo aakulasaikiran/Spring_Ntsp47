@@ -1,0 +1,26 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+ <!--  For using apache dbcp --> 
+ <bean id="bds"  class="org.apache.commons.dbcp.BasicDataSource">
+    <property name="driverClassName"  value="oracle.jdbc.driver.OracleDriver"/>
+    <property name="url"  value="jdbc:oracle:thin:@localhost:1521:xe"/>
+    <property name="username"  value="scott"/>
+    <property name="password"  value="tiger"/>
+    <property name="initialSize"  value="4"/>
+    <property name="maxActive"  value="30"/>
+ </bean>
+  
+ 
+ <bean id="sjCall"  class=" org.springframework.jdbc.core.simple.SimpleJdbcCall">
+      <constructor-arg  ref="bds"/>
+ </bean>
+ <bean id="stDao"  class="com.nt.dao.StudentDaoImpl">
+     <property name="sjc" ref="sjCall"/>
+ </bean>
+ <bean id="stService"  class="com.nt.service.StudentServiceImpl">
+     <property name="dao" ref="stDao"/>
+ </bean>
+</beans>

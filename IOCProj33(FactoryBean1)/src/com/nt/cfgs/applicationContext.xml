@@ -1,0 +1,15 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  
+  <bean id="df"  class="com.nt.beans.DateFactoryBean">
+      <property name="year" value="117"/>
+      <property name="month" value="3"/>
+      <property name="date" value="9"/>
+  </bean>
+  <bean id="remainder"  class="com.nt.beans.ScheduleRemainder">
+       <property name="date" ref="df"/>
+  </bean>
+ </beans>

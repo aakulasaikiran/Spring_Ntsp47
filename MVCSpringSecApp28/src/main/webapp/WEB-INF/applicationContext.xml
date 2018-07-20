@@ -1,0 +1,44 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.0.3.xsd">
+
+<beans:import resource="persistence-beans.xml"/>                    
+
+    <http use-expressions="true">
+        <intercept-url pattern="/home.htm" access="permitAll" />
+        <intercept-url pattern="/profile.htm" access="hasRole('ROLE_USER')" />
+        <intercept-url pattern="/phone.htm" access="hasRole('ROLE_ADMIN')" />
+         <form-login />
+         <logout />
+        <remember-me />
+         <session-management invalid-session-url="/logout.htm">
+	            <concurrency-control max-sessions="3" error-if-maximum-exceeded="true" />
+	        </session-management> 
+
+    </http>
+
+<authentication-manager>
+	  <authentication-provider>
+		<jdbc-user-service
+		   data-source-ref="c3P0ds"
+		  users-by-username-query="select uname,pwd,status from users where uname=?"
+		  authorities-by-username-query="select uname,role from users_roles where uname=?" />
+		  
+	  </authentication-provider>
+	</authentication-manager>
+
+  <!--   <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="raja" password="rani" authorities="ROLE_USER" />
+                <user name="ravi" password="ravi" authorities="ROLE_ADMIN" />
+                <user name="jani" password="begum" authorities="ROLE_ADMIN,ROLE_USER" />
+            </user-service>
+        </authentication-provider>
+    </authentication-manager> -->
+    
+</beans:beans>   

@@ -1,0 +1,27 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!-- Handler mapping for UrlFileNameViewController-->
+ <bean id="suhm"  class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+     <property name="mappings">
+       <props>
+           <prop key="home.htm">pvc</prop>
+           <prop key="wish.htm">wc</prop>
+       </props>
+     </property>
+ </bean>
+ <!-- controller class -->
+  <bean id="pvc"  class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+     <property name="viewName"  value="home"/>
+ </bean>
+ <bean  id="wc"  class="com.nt.controller.WishController">
+      <property name="service" ref="wishService"/>
+ </bean>
+ 
+  <!--  View Resolver  -->
+ <bean id="vr"  class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+     <property name="prefix"  value="/WEB-INF/pages/"/>
+     <property name="suffix"   value=".jsp"/>
+ </bean>
+</beans>

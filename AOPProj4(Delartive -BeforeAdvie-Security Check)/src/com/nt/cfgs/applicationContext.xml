@@ -1,0 +1,43 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="c3P0ds"  class="com.mchange.v2.c3p0.ComboPooledDataSource">
+    <property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>
+    <property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+    <property name="user" value="system"/>
+    <property name="password" value="manager"/>
+    <property name="initialPoolSize" value="10"/>
+     <property name="maxPoolSize" value="20"/>
+   </bean>
+  <bean id="template"  class="org.springframework.jdbc.core.JdbcTemplate">
+       <property name="dataSource"  ref="c3P0ds"/>
+  </bean>
+   <bean id="authDao"  class="com.nt.dao.AuthenticationDAOImpl">
+      <property name="jt" ref="template"/>
+   </bean>
+   <bean id="amService"  class="com.nt.aspect.AuthenticationServiceManager">
+      <property name="dao"  ref="authDao"/>
+   </bean>
+   
+    <!-- cfg target class -->
+  <bean id="iac"  class="com.nt.service.IntrAmtCalculator"/>
+  
+  <!-- Cfg Advice/aspect classes-->
+  <bean id="scAdvice"  class="com.nt.aspect.SecurityCheckAdvice">
+     <property name="asm"  ref="amService"/> 
+  </bean>
+  
+  
+  <!--  Cfg ProxyFactoryBean -->
+  <bean id="pfb"  class="org.springframework.aop.framework.ProxyFactoryBean">
+    <property name="target" ref="iac"/>
+    <property name="interceptorNames">
+       <list>
+         <value>scAdvice</value>
+       </list>
+    </property>
+  </bean>
+   
+ </beans>

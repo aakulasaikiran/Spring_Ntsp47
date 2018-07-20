@@ -1,0 +1,29 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- Bean instantiation using static factory methods -->
+    <bean id="clazz"  class="java.lang.Class" factory-method="forName">
+       <constructor-arg value="java.util.Date"/>
+    </bean>   <!-- Uses Class.forName("java.util.Date") -->
+    
+    <bean id="cal"   class="java.util.Calendar"  factory-method="getInstance"/>
+    <!-- Using instance factory methods -->
+    <bean id="s" class="java.lang.String">
+       <constructor-arg  value="hello"/>
+    </bean>
+    <bean id="s1"  factory-bean="s"  factory-method="concat">
+      <constructor-arg  value="123"/>
+    </bean>
+    
+    <bean id="sb"  class="java.lang.StringBuffer" >
+       <constructor-arg value="hello123"/>
+    </bean>
+    <bean id="s2"  factory-bean="sb"  factory-method="substring">
+      <constructor-arg value="0"/>
+      <constructor-arg value="4"/>
+    </bean>
+
+  </beans>
+
+ 

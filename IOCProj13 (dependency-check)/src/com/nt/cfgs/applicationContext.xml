@@ -1,0 +1,18 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+ 
+ <bean id="pp"  class="com.nt.beans.Passport">
+   <property name="pno" value="AA434"/>
+    <property name="country" value="India"/>
+ </bean>
+
+  <bean id="emp"   class="com.nt.beans.Employee"  dependency-check="none">
+     <property name="id" value="1001"/>
+     <property name="name" value="raja"/>
+<!--      <property name="passport"  ref="pp"/> -->
+     
+  </bean>
+
+</beans>

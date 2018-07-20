@@ -1,0 +1,45 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+ <bean id="c3P0ds"  class="com.mchange.v2.c3p0.ComboPooledDataSource">
+    <property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>
+    <property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+    <property name="user" value="system"/>
+    <property name="password" value="manager"/>
+    <property name="initialPoolSize" value="10"/>
+     <property name="maxPoolSize" value="20"/>
+   </bean>
+   <bean id="template"  class="org.springframework.jdbc.core.JdbcTemplate">
+       <property name="dataSource"  ref="c3P0ds"/>
+  </bean>
+ 
+  <bean id="bankDAO"  class="com.nt.dao.BankDAOImpl">
+     <property name="jt"  ref="template"/>
+  </bean>
+  <!-- Cfg of Traget class  -->
+  <bean id="bankService"  class="com.nt.service.BankServiceImpl">
+      <property name="dao"  ref="bankDAO"/>
+  </bean>
+  <!--  Cfg of Transaction Service (Advice) -->
+   <bean id="txMgmr" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+     <property name="dataSource" ref="c3P0ds"/>
+  </bean>
+  <!-- Cfg Tx attributes on b.methods (similar to Pointuct) -->
+  <bean id="nmtas" class="org.springframework.transaction.interceptor.NameMatchTransactionAttributeSource">
+      <property name="properties">
+        <props>
+           <prop key="transferMoney">PROPAGATION_NOT_SUPPORTED</prop>
+         </props>  
+      </property>
+  </bean> 
+  <!-- cfg TransactionProxyFactory bean to apply Tx service -->
+  <bean id="tpfb" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+<!--      <property name="transactionManager" ref="txMgmr"/> -->
+      <property name="target"  ref="bankService"/> 
+     <property name="TransactionAttributeSource" ref="nmtas"/>
+ </bean>
+
+</beans>
+  

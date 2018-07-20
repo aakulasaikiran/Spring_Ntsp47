@@ -1,0 +1,31 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+ <!-- Handler mapping -->
+<bean id="suhm" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+    <property name="mappings">
+         <props>
+            <prop key="form.htm">pfc</prop>
+         </props>               
+     </property>
+  </bean>
+   <!-- properties file -->
+     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+         <property name="basename"  value="com.nt.validator.RegisterCmdErrors"/>
+    </bean>
+  <!-- Controller class -->
+  <bean id="pfc"  class="com.nt.controller.ProcessFormController">
+      <property name="formView"  value="form_register"/>
+      <property name="commandClass"  value="com.nt.command.RegisterCmd"/>
+      <property name="commandName"  value="regCmd"/>
+       <property name="sessionForm"  value="true"/>
+       <property name="validator" ><bean class="com.nt.validator.RegisterValidator"/></property>
+  </bean>
+     <!-- view Resolver -->
+ <bean id="vr"  class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property  name="prefix" value="/WEB-INF/pages/"/>  
+    <property  name="suffix" value=".jsp"/>
+ </bean>             
+
+</beans>

@@ -1,0 +1,19 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean id="basePulsor" class="com.nt.beans.Bike"  abstract="true">
+     <property  name="make" value="Bajaj"/>
+     <property  name="engineCC"  value="150cc"/>
+  </bean>
+ <bean id="pulsor1" class="com.nt.beans.Bike"  parent="basePulsor">
+     <property  name="id"  value="TS077799"/>
+  </bean>
+
+<bean id="pulsor2" class="com.nt.beans.Bike"  parent="basePulsor">
+     <property  name="id"  value="TS079999"/>
+  </bean>
+  
+ </beans>
+  

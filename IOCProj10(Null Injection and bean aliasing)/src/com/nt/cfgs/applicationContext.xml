@@ -1,0 +1,18 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="dt"  class="java.util.Date"/>
+  
+  <bean name="pc,dp" id="computer"  class="com.nt.beans.Computer">
+     <constructor-arg  value="1001"/>
+     <constructor-arg  value="pc1"/>
+     <constructor-arg  ref="dt"/>
+     <constructor-arg><null/></constructor-arg>
+  </bean>
+    <alias name="computer"  alias="box"/>
+    <alias name="computer"  alias="system"/>
+    
+</beans>
+

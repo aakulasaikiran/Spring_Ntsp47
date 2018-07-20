@@ -1,0 +1,54 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!-- Handler mapping for ParameterviewController-->
+<!-- <bean id="suhm"  class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+   <property name="mappings">
+    <props>
+        <prop key="home.htm">pvc1</prop>
+        <prop key="wish.htm">wc</prop>
+          <prop key="about.htm">pvc2</prop>
+          <prop key="contact_us.htm">pvc3</prop>
+     </props> 
+   </property>
+</bean>
+ -->
+<!-- Handler mapping for UrlFileNameViewController-->
+ <bean id="suhm"  class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+     <property name="mappings">
+       <props>
+           <prop key="home.htm">ufvc</prop>
+           <prop key="wish.htm">wc</prop>
+           <prop key="about_us.htm">ufvc</prop>
+           <prop key="contact_us.htm">ufvc</prop>
+       </props>
+     </property>
+     <property name="interceptors">
+          <list>
+            <ref bean="tic"/>
+          </list>
+     </property>
+ </bean>
+  <bean id="tic"  class="com.nt.interceptor.TimeCheckInterceptor"/>
+ <!-- controller class -->
+ <!-- <bean id="pvc1"  class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+     <property name="viewName"  value="home"/>
+ </bean>
+ 
+ <bean id="pvc2"  class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+   <property name="viewName" value="about_us"/>
+ </bean>
+ <bean id="pvc3"  class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+   <property name="viewName" value="contact_us"/>
+ </bean>
+  -->
+  <bean id="ufvc"  class="org.springframework.web.servlet.mvc.UrlFilenameViewController"/>
+ <bean id="wc"  class="com.nt.controller.WishController"/>
+ 
+  <!--  View Resolver  -->
+ <bean id="vr"  class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+     <property name="prefix"  value="/WEB-INF/pages/"/>
+     <property name="suffix"   value=".jsp"/>
+ </bean>
+</beans>

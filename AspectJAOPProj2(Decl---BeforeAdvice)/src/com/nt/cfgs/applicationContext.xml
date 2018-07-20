@@ -1,0 +1,27 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:aop="http://www.springframework.org/schema/aop"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop.xsd">
+<!--  cfg target class -->
+<bean id="orderApprover" class="com.nt.service.OrderApprover"/>
+<!-- cfg aspect/advice class as spring bean -->
+<bean id="auditAspect"  class="com.nt.aspect.AuditingAspect"/>
+
+<aop:config>
+<!--     prepare pointcut -->
+    <aop:pointcut id="ptc1" expression="execution(* com.nt.service.OrderApprover.*(..)) and args(oid)"/>
+    
+    
+<!--     Cfg Advice class -->
+     <aop:aspect id="auditAdvice"  ref="auditAspect" >
+        <aop:before method="auditing"  pointcut-ref="ptc1"/>
+   </aop:aspect>
+   
+ </aop:config>
+
+
+
+</beans>
